@@ -28,7 +28,10 @@
 #ifndef BCF_H
 #define BCF_H
 
-#define BCF_VERSION "0.1.17-dev (r973:277)"
+#include <config.h>
+
+#define BCF_VERSION (PACKAGE_VERSION "-dev (" GIT_REV ")")
+
 
 #include <stdint.h>
 #include <zlib.h>

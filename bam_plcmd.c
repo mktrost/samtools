@@ -8,7 +8,7 @@
 #include "faidx.h"
 #include "kstring.h"
 
-static inline int printw(int c, FILE *fp)
+static inline int pileup_printw(int c, FILE *fp)
 {
 	char buf[16];
 	int l, x;
@@ -43,13 +43,13 @@ static inline void pileup_seq(const bam_pileup1_t *p, int pos, int ref_len, cons
 		putchar(c);
 	} else putchar(p->is_refskip? (bam1_strand(p->b)? '<' : '>') : '*');
 	if (p->indel > 0) {
-		putchar('+'); printw(p->indel, stdout);
+		putchar('+'); pileup_printw(p->indel, stdout);
 		for (j = 1; j <= p->indel; ++j) {
 			int c = bam_nt16_rev_table[bam1_seqi(bam1_seq(p->b), p->qpos + j)];
 			putchar(bam1_strand(p->b)? tolower(c) : toupper(c));
 		}
 	} else if (p->indel < 0) {
-		printw(p->indel, stdout);
+		pileup_printw(p->indel, stdout);
 		for (j = 1; j <= -p->indel; ++j) {
 			int c = (ref && (int)pos+j < ref_len)? ref[pos+j] : 'N';
 			putchar(bam1_strand(p->b)? tolower(c) : toupper(c));
