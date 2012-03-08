@@ -3,6 +3,7 @@ The official SAMtools repository can be found at: http://samtools.sourceforge.ne
 
 ## Major fixes:
 	- GNU Autotools build system is supported
+	- added options into "samtools depth" to print out histograms for plotting with Circos (-c/-B)
     - added "samtools qa" command, to compute the mean and median coverage, as well a histogram 
     from 1 to N (defined by param) containing the number of bases covered a maximum of 1X, 2X...NX. 
     Furthermore, "other" information is also available in the output file, namely:
@@ -22,3 +23,4 @@ The official SAMtools repository can be found at: http://samtools.sourceforge.ne
     - catches and reports an invalid BAM header, instead of segfaulting later on.
     - fixes a small underflow/overflow bug in integer parsing.
     - checks for a lowerbound in text entry box to avoid segfault in tview.
+	- choose the sort type in "samtools sort", along with a better help message
