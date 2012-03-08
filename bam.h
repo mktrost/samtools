@@ -28,6 +28,8 @@
 #ifndef BAM_BAM_H
 #define BAM_BAM_H
 
+#include <config.h>
+
 /*!
   @header
 
@@ -40,7 +42,41 @@
   @copyright Genome Research Ltd.
  */
 
-#define BAM_VERSION "0.1.18-dev (r982:313)"
+#define BAM_VERSION (PACKAGE_VERSION "-dev (" GIT_REV ")")
+
+// CURSES Library
+#ifdef HAVE_CURSES_H // 1 if
+#if HAVE_CURSES_H == 1 // 2 if
+#include <curses.h>
+#ifndef NCURSES_VERSION // 3 if
+#warning "curses.h is present but NCURSES_VERSION not defined; tview is NOT compiled"
+#else // 3 else
+#define _HAVE_CURSES
+#endif // 3 endif
+#endif // 2 endif
+#else // 1 else
+#ifdef HAVE_NCURSES_H  // 2 if
+#if HAVE_NCURSES_H == 1 // 3 if
+#include <ncurses.h>
+#ifndef NCURSES_VERSION // 4 if
+#warning "ncurses.h is present but NCURSES_VERSION not defined; tview is NOT compiled"
+#else // 4 else
+#define _HAVE_CURSES
+#endif // 4 endif
+#endif // 3 endif
+#else // 2 else
+#ifdef HAVE_XCURSES_H // 3 if
+#if HAVE_XCURSES_H == 1 // 4 if
+#include <xcurses.h>
+#ifndef NCURSES_VERSION // 5 if
+#warning "xcurses.h is present but NCURSES_VERSION not defined; tview is NOT compiled"
+#else // 5 else
+#define _HAVE_CURSES
+#endif // 5 endif
+#endif // 4 endif
+#endif // 3 endif
+#endif // 2 endif
+#endif // 1 endif
 
 #include <stdint.h>
 #include <stdlib.h>

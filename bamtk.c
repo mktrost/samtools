@@ -43,7 +43,7 @@ static int usage()
 	fprintf(stderr, "         mpileup     multi-way pileup\n");
 	fprintf(stderr, "         depth       compute the depth\n");
 	fprintf(stderr, "         faidx       index/extract FASTA\n");
-#if _CURSES_LIB != 0
+#if HAVE_NCURSES_H == 1
 	fprintf(stderr, "         tview       text alignment viewer\n");
 #endif
 	fprintf(stderr, "         index       index alignment\n");
@@ -104,7 +104,7 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "[main] The `pileup' command has been removed. Please use `mpileup' instead.\n");
 		return 1;
 	}
-#if _CURSES_LIB != 0
+#if HAVE_NCURSES_H == 1
 	else if (strcmp(argv[1], "tview") == 0) return bam_tview_main(argc-1, argv+1);
 #endif
 	else if (strcmp(argv[1], "qa") == 0) return main_qa(argc-1, argv+1);

@@ -1,26 +1,9 @@
-#undef _HAVE_CURSES
-
-#if _CURSES_LIB == 0
-#elif _CURSES_LIB == 1
-#include <curses.h>
-#ifndef NCURSES_VERSION
-#warning "_CURSES_LIB=1 but NCURSES_VERSION not defined; tview is NOT compiled"
-#else
-#define _HAVE_CURSES
-#endif
-#elif _CURSES_LIB == 2
-#include <xcurses.h>
-#define _HAVE_CURSES
-#else
-#warning "_CURSES_LIB is not 0, 1 or 2; tview is NOT compiled"
-#endif
-
+#include "bam.h" // this should define _HAVE_CURSES
 #ifdef _HAVE_CURSES
 #include <ctype.h>
 #include <assert.h>
 #include <string.h>
 #include <math.h>
-#include "bam.h"
 #include "faidx.h"
 #include "bam2bcf.h"
 

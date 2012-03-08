@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 #include "errmod.h"
-#include "bcftools/bcf.h"
+#include "bcftools_src/bcf.h"
 
 #define B2B_INDEL_NULL 10000
 
