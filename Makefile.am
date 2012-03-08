@@ -1,9 +1,20 @@
-bin_PROGRAMS = samtools bcftools
+bin_PROGRAMS = samtools bcftools razip bgzip 
+
 lib_LIBRARIES = libbam.a
 
+BGZF_SOURCES = \
+			   bgzf.c bgzf.h 
+
+RAZF_SOURCES = \
+			   razf.c razf.h 
+				  
+KNETFILE_SOURCES = \
+				   knetfile.c knetfile.h 
+
 LIBRARY_SOURCES = \
-				  knetfile.c knetfile.h \
-				  bgzf.c bgzf.h \
+				  ${BGZF_SOURCES} \
+				  ${KNETFILE_SOURCES} \
+				  ${RAZF_SOURCES} \
 				  kstring.c kstring.h \
 				  bam_aux.c \
 				  bam.c bam.h \
@@ -13,7 +24,6 @@ LIBRARY_SOURCES = \
 				  bam_pileup.c \
 				  bam_lpileup.c \
 				  bam_md.c \
-				  razf.c razf.h \
 				  faidx.c faidx.h \
 				  bedidx.c \
 				  bam_sort.c \
@@ -65,6 +75,20 @@ bcftools_SOURCES = \
 				   bcftools_src/main.c
 
 bcftools_LDADD =
+
+razip_SOURCES = \
+				${KNETFILE_SOURCES} \
+				${RAZF_SOURCES} \
+				razip.c
+
+razip_LDADD =
+
+bgzip_SOURCES = \
+				${KNETFILE_SOURCES} \
+				${BGZF_SOURCES} \
+				bgzip.c
+
+bgzip_LDADD =
 
 libbam_a_SOURCES = \
 				   ${LIBRARY_SOURCES}
