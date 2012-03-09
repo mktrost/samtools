@@ -11,6 +11,7 @@ AC_CONFIG_AUX_DIR(config)
 AM_INIT_AUTOMAKE([dist-bzip2 subdir-objects])
 AC_CONFIG_SRCDIR([config.h.in])
 AC_CONFIG_HEADERS([config.h])
+AC_CONFIG_MACRO_DIR([m4])
 
 # Sets build_cpu, build_vendor and build_os variables
 AC_CANONICAL_BUILD
@@ -23,7 +24,11 @@ AC_PROG_INSTALL
 AC_GNU_SOURCE
 
 # Check for libtool
-AC_PROG_LIBTOOL
+LT_INIT
+
+AC_PROG_RANLIB
+AC_PROG_CXX
+AC_PROG_LN_S
 
 # set CFLAGS and CXXFLAGS
 default_CFLAGS="-g -Wall -O2 -pthread";
