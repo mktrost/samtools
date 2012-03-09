@@ -7,9 +7,9 @@ int main(int argc, char ** argv)
 {
     //////////////////////////
     // Test opening the file.
-    PBGZF* filePtr = pbgzf_open("data/bamFile.bam", "rb");
+    PBGZF* pbgzfHandle = pbgzf_open("data/bamFile.bam", "rb");
 
-    if(filePtr == NULL)
+    if(pbgzfHandle == NULL)
     {
         printf("ERROR opening test file.\n");
         return(-1);
@@ -20,10 +20,19 @@ int main(int argc, char ** argv)
     const int BUFFER_SIZE = 100;
     const int TEST_FILE_SIZE = 37;
     char testBuffer[BUFFER_SIZE];
-    assert(pbgzf_read(filePtr, testBuffer, 4) == 4);
-    assert(pbgzf_read(filePtr, testBuffer, 2) == 2);
+    assert(pbgzf_tell(pbgzfHandle) == 0);
+    assert(pbgzf_read(pbgzfHandle, testBuffer, 4) == 4);
+    assert(pbgzf_read(pbgzfHandle, testBuffer, 2) == 2);
     // 37 - 4 - 2 = 37 - 6 = 31 left to read
-    assert(pbgzf_read(filePtr, testBuffer, BUFFER_SIZE) == 31);
+    assert(pbgzf_read(pbgzfHandle, testBuffer, BUFFER_SIZE) == 31);
+
+    // Read again after at the end of the file.
+    assert(pbgzf_read(pbgzfHandle, testBuffer, 2) == 0);
+
+    // Rewind the file.
+    assert(pbgzf_seek(pbgzfHandle, 0, SEEK_SET) == 0);
+    assert(pbgzf_tell(pbgzfHandle) == 0);
+    assert(pbgzf_read(pbgzfHandle, testBuffer, 4) == 4);
 
     return(0);
 }
