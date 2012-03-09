@@ -104,3 +104,5 @@ SUBDIRS = .
 docdir = ${datadir}/doc/${PACKAGE}
 
 dist_doc_DATA = LICENSE samtools.1
+
+ACLOCAL_AMFLAGS = -I m4
