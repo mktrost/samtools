@@ -34,5 +34,9 @@ int main(int argc, char ** argv)
     assert(pbgzf_tell(pbgzfHandle) == 0);
     assert(pbgzf_read(pbgzfHandle, testBuffer, 4) == 4);
 
+    assert(pbgzf_read(pbgzfHandle, testBuffer, BUFFER_SIZE) == 33);
+    // Read again after at the end of the file.
+    assert(pbgzf_read(pbgzfHandle, testBuffer, 2) == 0);
+
     return(0);
 }
